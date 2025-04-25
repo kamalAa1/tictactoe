@@ -1,26 +1,32 @@
-import React, { useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import CouponBonus from './pages/CouponBonus/CouponBonus.jsx';
-import DailyBonus from './pages/DailyBonus/DailyBonus.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import Done from './pages/Done.jsx';
-import Mahjong from './pages/Mahjong/Mahjong.jsx';
-import PrivacyPolicy from './pages/PrivacyPolicy/index.jsx';
-import PromotionalVideo from './pages/PromotionalVideo/PromotionalVideo.jsx';
-import Puzzle from './pages/Puzzle/Puzzle.jsx';
-import PuzzleWin from './pages/PuzzleWin/PuzzleWin.jsx';
-import Quiz from './pages/Quiz/Quiz.jsx';
-import Services from './pages/Services/Services.jsx';
-import Success from './pages/Success.jsx';
-import TermsAndConditions from './pages/TermsAndConditions/index.jsx';
-import TicTacToe from './pages/TicTacToe/TicTacToe.jsx';
+import React, { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import { Route, Routes, useLocation } from "react-router-dom";
+import CouponBonus from "./pages/CouponBonus/CouponBonus.jsx";
+import DailyBonus from "./pages/DailyBonus/DailyBonus.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Done from "./pages/Done.jsx";
+import Mahjong from "./pages/Mahjong/Mahjong.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy/index.jsx";
+import PromotionalVideo from "./pages/PromotionalVideo/PromotionalVideo.jsx";
+import Puzzle from "./pages/Puzzle/Puzzle.jsx";
+import PuzzleWin from "./pages/PuzzleWin/PuzzleWin.jsx";
+import Quiz from "./pages/Quiz/Quiz.jsx";
+import Services from "./pages/Services/Services.jsx";
+import Success from "./pages/Success.jsx";
+import TermsAndConditions from "./pages/TermsAndConditions/index.jsx";
+import TicTacToe from "./pages/TicTacToe/TicTacToe.jsx";
+import usePageTracking from "./hooks/usePageTracking.js";
+import ReactGA from "react-ga4";
+
+// Initialize GA4
+ReactGA.initialize("G-E2F85RDW6B");
 
 const App = () => {
+  usePageTracking();
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       localStorage.clear();
     }
   }, [location.pathname]);
