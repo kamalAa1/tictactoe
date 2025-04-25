@@ -5,11 +5,11 @@ import {
   DialogFooter,
   DialogHeader,
   Typography,
-} from '@material-tailwind/react';
-import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
-import { FaQuestion } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
+} from "@material-tailwind/react";
+import queryString from "query-string";
+import React, { useEffect, useState } from "react";
+import { FaQuestion } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DailyBonus = () => {
   const [open, setOpen] = useState(false);
@@ -65,6 +65,13 @@ const DailyBonus = () => {
               </div>
             ))}
           </div>
+
+          <Typography
+            variant="small"
+            className="px-3 text-center my-3 text-white"
+          >
+            Version - 2
+          </Typography>
         </div>
       </div>
       {open && <ClaimModal open={open} setOpen={setOpen} />}
@@ -83,7 +90,7 @@ const ClaimModal = ({ open, setOpen }) => {
   );
 
   const navigateHandler = () => {
-    navigate('/done', { state: { type: 'daily-bonus' } }, { replace: true });
+    navigate("/done", { state: { type: "daily-bonus" } }, { replace: true });
   };
 
   return (

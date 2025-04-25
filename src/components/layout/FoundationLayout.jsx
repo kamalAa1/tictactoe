@@ -1,6 +1,6 @@
-import { Typography } from '@material-tailwind/react';
-import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { Typography } from "@material-tailwind/react";
+import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 
 /**
  * Outer wrapper of the entire app,
@@ -44,7 +44,6 @@ const FoundationLayout = ({ children }) => {
       >
         Get up to {point} {currency} for playing the game
       </Typography>
-
       <div
         className="flex flex-col md:flex-row gap-6 p-4 rounded-lg"
         style={{
@@ -53,6 +52,9 @@ const FoundationLayout = ({ children }) => {
       >
         {children}
       </div>
+      <Typography variant="small" className="px-3 text-center my-3 text-white">
+        Version - 2
+      </Typography>
     </div>
   );
 };

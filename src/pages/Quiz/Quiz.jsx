@@ -1,10 +1,10 @@
-import { Button, Typography } from '@material-tailwind/react';
-import axios from 'axios';
-import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import ClaimModal from './Modals/ClaimModal';
-import LoseModal from './Modals/LoseModal';
+import { Button, Typography } from "@material-tailwind/react";
+import axios from "axios";
+import queryString from "query-string";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import ClaimModal from "./Modals/ClaimModal";
+import LoseModal from "./Modals/LoseModal";
 // import questions from './questions';
 
 function shuffle(array) {
@@ -20,9 +20,9 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
-  const [questionText, setQuestionText] = useState('');
-  const [questionType, setQuestionType] = useState('');
-  const [questionImage, setQuestionImage] = useState('');
+  const [questionText, setQuestionText] = useState("");
+  const [questionType, setQuestionType] = useState("");
+  const [questionImage, setQuestionImage] = useState("");
   const [choices, setChoices] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [correctAnswer, setCorrectAnswer] = useState(null);
@@ -103,7 +103,7 @@ export default function Quiz() {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
-          'https://us-central1-rumbangapps-a056a.cloudfunctions.net/expressApi/faucet/get-quest'
+          "https://us-central1-rumbangapps-a056a.cloudfunctions.net/expressApi/faucet/get-quest"
         );
 
         setQuestions(data.data);
@@ -128,7 +128,7 @@ export default function Quiz() {
   return (
     <React.Fragment>
       <div
-        className={`h-[100vh] flex flex-col`}
+        className={`min-h-[100vh] flex flex-col`}
         style={{
           background: `#${bgColor}`,
         }}
@@ -191,7 +191,7 @@ export default function Quiz() {
                 {questionText}
               </Typography>
               <div className="w-full">
-                {questionType === 'image' && (
+                {questionType === "image" && (
                   <img
                     src={questionImage}
                     alt="img"
@@ -210,7 +210,7 @@ export default function Quiz() {
                           ? choice.answer
                             ? `#14b8a6`
                             : `#9e6a7e`
-                          : 'transparent',
+                          : "transparent",
                     }}
                     onClick={() => selectChoice(choice.answer, index)}
                     aria-label={choice.text}
@@ -247,6 +247,13 @@ export default function Quiz() {
             </div>
           )}
         </div>
+
+        <Typography
+          variant="small"
+          className="px-3 text-center my-3 text-white"
+        >
+          Version - 2
+        </Typography>
       </div>
       {showModal && (
         <ClaimModal

@@ -6,44 +6,44 @@ import {
   DialogHeader,
   Input,
   Typography,
-} from '@material-tailwind/react';
-import queryString from 'query-string';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
-import { FaFacebook, FaTelegram, FaYoutube } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+} from "@material-tailwind/react";
+import queryString from "query-string";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { FaFacebook, FaTelegram, FaYoutube } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
 const items = [
   {
-    title: 'Facebook',
+    title: "Facebook",
     icon: <FaFacebook className="w-6 h-6" />,
-    link: '#',
+    link: "#",
   },
   {
-    title: 'YouTube',
+    title: "YouTube",
     icon: <FaYoutube className="w-6 h-6" />,
-    link: '#',
+    link: "#",
   },
   {
-    title: 'Telegram',
+    title: "Telegram",
     icon: <FaTelegram className="w-6 h-6" />,
-    link: '#',
+    link: "#",
   },
 ];
 
 const CouponBonus = () => {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
   const { bgColor, iconColor } = queryString.parse(location.search);
 
   const claimHandler = () => {
-    if (code !== '' && code.trim().length <= 6) {
+    if (code !== "" && code.trim().length <= 6) {
       setOpen(true);
-      setCode('');
+      setCode("");
     } else {
-      toast.error('Code should be 6 characters long!');
+      toast.error("Code should be 6 characters long!");
     }
   };
 
@@ -115,6 +115,13 @@ const CouponBonus = () => {
               ))}
             </div>
           </div>
+
+          <Typography
+            variant="small"
+            className="px-3 text-center my-3 text-white"
+          >
+            Version - 2
+          </Typography>
         </div>
       </div>
       {open && <ClaimModal open={open} setOpen={setOpen} />}

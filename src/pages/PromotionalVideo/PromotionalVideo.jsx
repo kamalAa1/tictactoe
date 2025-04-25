@@ -1,24 +1,24 @@
-import { Button, Input, Typography } from '@material-tailwind/react';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { BiCopy } from 'react-icons/bi';
-import { IoCashOutline, IoCloudUpload, IoVideocam } from 'react-icons/io5';
-import { useSearchParams } from 'react-router-dom';
-import ConfirmModal from './Modals/ConfirmModal';
-import MyVideos from './MyVideos';
-import TermsAndConditions from './TermsAndConditions';
+import { Button, Input, Typography } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { BiCopy } from "react-icons/bi";
+import { IoCashOutline, IoCloudUpload, IoVideocam } from "react-icons/io5";
+import { useSearchParams } from "react-router-dom";
+import ConfirmModal from "./Modals/ConfirmModal";
+import MyVideos from "./MyVideos";
+import TermsAndConditions from "./TermsAndConditions";
 
 const steps = [
   {
-    text: 'Make video',
+    text: "Make video",
     icon: <IoVideocam size={20} className="w-6 h-6 text-purple-500" />,
   },
   {
-    text: 'Upload video link',
+    text: "Upload video link",
     icon: <IoCloudUpload size={20} className="w-6 h-6 text-purple-500" />,
   },
   {
-    text: 'Earn money',
+    text: "Earn money",
     icon: <IoCashOutline size={20} className="w-6 h-6 text-purple-500" />,
   },
 ];
@@ -28,27 +28,27 @@ const PromotionalVideo = () => {
   const [terms, setTerms] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
 
   const [searchParams] = useSearchParams();
 
   // Extract specific search params if needed
-  const uid = searchParams.get('uid');
-  const collection = searchParams.get('collection');
+  const uid = searchParams.get("uid");
+  const collection = searchParams.get("collection");
 
   const copyHandler = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success('copied!');
+      toast.success("copied!");
     } catch (error) {
-      toast.error('failed to copy!');
+      toast.error("failed to copy!");
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!url) {
-      toast.error('Video url is required');
+      toast.error("Video url is required");
       return;
     } else {
       setOpen(true);
@@ -62,17 +62,17 @@ const PromotionalVideo = () => {
         const raw = JSON.stringify({ uid, collection });
 
         const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append("Content-Type", "application/json");
 
         const requestOptions = {
-          method: 'POST',
+          method: "POST",
           headers: myHeaders,
           body: raw,
-          redirect: 'follow',
+          redirect: "follow",
         };
 
         const response = await fetch(
-          'https://us-central1-rumbangapps-a056a.cloudfunctions.net/expressApi/firebaseServices/getPromotionalTerms',
+          "https://us-central1-rumbangapps-a056a.cloudfunctions.net/expressApi/firebaseServices/getPromotionalTerms",
           requestOptions
         );
 
@@ -85,7 +85,7 @@ const PromotionalVideo = () => {
         setTerms(result);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching promotional terms:', error);
+        console.error("Error fetching promotional terms:", error);
         setIsLoading(false);
       } finally {
         setIsLoading(false);
@@ -175,7 +175,7 @@ const PromotionalVideo = () => {
               <div>
                 <div className="bg-purple-50 p-2 rounded flex items-center justify-start gap-2">
                   <Typography>Unique code : </Typography>
-                  <Typography as={'div'} className="flex items-center gap-2">
+                  <Typography as={"div"} className="flex items-center gap-2">
                     <strong className="font-bold">{terms?.uniqueCode}</strong>
                     <Typography
                       onClick={() => copyHandler(terms?.uniqueCode)}
@@ -199,6 +199,13 @@ const PromotionalVideo = () => {
               </Button>
             </div>
             <MyVideos />
+
+            <Typography
+              variant="small"
+              className="px-3 text-center my-3 text-black"
+            >
+              Version - 2
+            </Typography>
           </div>
         </div>
       )}

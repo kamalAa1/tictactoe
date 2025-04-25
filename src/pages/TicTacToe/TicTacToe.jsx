@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { Typography } from '@material-tailwind/react';
-import queryString from 'query-string';
-import { useLocation, useNavigate } from 'react-router-dom';
-import GameBoard from './Elements/GameBoard';
-import ClaimLoseWinModal from './Modals/ClaimLoseWinModal';
+import { Typography } from "@material-tailwind/react";
+import queryString from "query-string";
+import { useLocation, useNavigate } from "react-router-dom";
+import GameBoard from "./Elements/GameBoard";
+import ClaimLoseWinModal from "./Modals/ClaimLoseWinModal";
 
 const TicTacToe = () => {
-  const emptyBoard = ['', '', '', '', '', '', '', '', ''];
+  const emptyBoard = ["", "", "", "", "", "", "", "", ""];
   const availableBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   const [gameSquares, setGameSquares] = useState(emptyBoard);
   const [availableSquares, setAvailableSquares] = useState(availableBoard);
-  const [hasWon, setHasWon] = useState('');
+  const [hasWon, setHasWon] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const [userChar, setUserChar] = useState('o');
-  const [compChar, setCompChar] = useState('x');
-  const [message, setMessage] = useState('');
-  const [secondMessage, setSecondMessage] = useState('');
+  const [userChar, setUserChar] = useState("o");
+  const [compChar, setCompChar] = useState("x");
+  const [message, setMessage] = useState("");
+  const [secondMessage, setSecondMessage] = useState("");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -45,7 +45,7 @@ const TicTacToe = () => {
     ];
 
     if (boardCleared(gameSquares)) {
-      return '';
+      return "";
     }
 
     // check for wins by trio
@@ -55,18 +55,18 @@ const TicTacToe = () => {
       const sq3 = squares[win[2]];
       const winCheck = [sq1, sq2, sq3];
 
-      if (winCheck.every((sq) => sq === winCheck[0] && sq !== '')) {
+      if (winCheck.every((sq) => sq === winCheck[0] && sq !== "")) {
         return sq1;
       }
     }
 
     // board is full, no more moves, win check failed, must tie
-    if (gameSquares.every((sq) => sq !== '')) {
-      return 'tie';
+    if (gameSquares.every((sq) => sq !== "")) {
+      return "tie";
     }
 
     // board is not full and win check failed
-    return '';
+    return "";
   };
 
   const updateBoard = (idx, asPlayer = true) => {
@@ -99,7 +99,7 @@ const TicTacToe = () => {
   };
 
   // board is empty
-  const boardCleared = (board) => board.every((sq) => sq === '');
+  const boardCleared = (board) => board.every((sq) => sq === "");
 
   // recursive minimax algorithm
   // https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/
@@ -118,12 +118,12 @@ const TicTacToe = () => {
 
     // We have proceeded to an endpoint in the currently running scenario.
     // return value of this path.
-    if (checkForState(gs) !== '' || depth === maxDepth) {
+    if (checkForState(gs) !== "" || depth === maxDepth) {
       // time for some arbitrary decision making
-      if (checkForState(gs) === 'o') {
+      if (checkForState(gs) === "o") {
         // if the move benefits o, it is maximized (rated by positivity)
         return 100 - depth;
-      } else if (checkForState(gs) === 'x') {
+      } else if (checkForState(gs) === "x") {
         // if the move benefits x, it is minimized (rated by negativity)
         return -100 + depth;
       } else {
@@ -134,7 +134,7 @@ const TicTacToe = () => {
     // if forMax, o benefits, !forMax, x benefits
     // set base minimax value.
     let base = forMax ? -100 : 100;
-    const char = forMax ? 'o' : 'x';
+    const char = forMax ? "o" : "x";
 
     for (var idxAsVal of as) {
       // set up a dummy game board to iterate over all scenarios
@@ -179,7 +179,7 @@ const TicTacToe = () => {
   useEffect(() => {
     const { point, currency } = queryString.parse(location.search);
     if (!point || !currency) {
-      navigate('/', { replace: true });
+      navigate("/", { replace: true });
     }
   }, [location, navigate]);
 
@@ -188,34 +188,34 @@ const TicTacToe = () => {
   }, [checkForState, gameSquares]);
 
   useEffect(() => {
-    if (compChar === 'o' && boardCleared(gameSquares)) {
+    if (compChar === "o" && boardCleared(gameSquares)) {
       findBestMove(false);
     }
   });
 
   useEffect(() => {
-    if (userChar === 'x') {
-      setCompChar('o');
-    } else if (userChar === 'o') {
-      setCompChar('x');
+    if (userChar === "x") {
+      setCompChar("o");
+    } else if (userChar === "o") {
+      setCompChar("x");
     }
   }, [userChar]);
 
   useEffect(() => {
-    if (hasWon === 'tie') {
+    if (hasWon === "tie") {
       setMessage(`It's a Draw match.\n Play Again!`);
       setIsModalOpen(true);
-    } else if (hasWon === 'o') {
+    } else if (hasWon === "o") {
       setMessage(`You have successfully won the match`);
       setSecondMessage(`Reward : ${point} ${currency.toLowerCase()}`);
       setIsModalOpen(true);
-    } else if (hasWon === 'x') {
+    } else if (hasWon === "x") {
       setMessage(`You lose the match!. Play again to get your payment!`);
       setIsModalOpen(true);
-    } else if (boardCleared(gameSquares) && userChar === 'o') {
-      setMessage('you first');
+    } else if (boardCleared(gameSquares) && userChar === "o") {
+      setMessage("you first");
     } else {
-      setMessage('');
+      setMessage("");
     }
   }, [hasWon, gameSquares, userChar, point, currency]);
 
@@ -268,6 +268,13 @@ const TicTacToe = () => {
           className="px-3 text-center my-3 text-white"
         >
           Note : You have to complete the game to get reward
+        </Typography>
+
+        <Typography
+          variant="small"
+          className="px-3 text-center my-3 text-white"
+        >
+          Version - 2
         </Typography>
       </div>
 
